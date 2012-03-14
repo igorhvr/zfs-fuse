@@ -557,7 +557,10 @@ uint64_t zfs_crc64_table[256];
  * Level 2 ARC
  */
 
-#define	L2ARC_WRITE_SIZE	(8 * 1024 * 1024)	/* initial write max */
+// #define	L2ARC_WRITE_SIZE	(8 * 1024 * 1024)	/* initial write max */
+#define	L2ARC_WRITE_SIZE	(2 * 8 * 1024 * 1024)	/* initial write max doubled for improved performance on a workload 
+                                                           where l2arc is much faster than regular pool devices */
+
 #define	L2ARC_HEADROOM		2		/* num of writes */
 #define	L2ARC_FEED_SECS		1		/* caching interval secs */
 #define	L2ARC_FEED_MIN_MS	200		/* min caching interval ms */
@@ -573,7 +576,7 @@ uint64_t l2arc_write_boost = L2ARC_WRITE_SIZE;	/* extra write during warmup */
 uint64_t l2arc_headroom = L2ARC_HEADROOM;	/* number of dev writes */
 uint64_t l2arc_feed_secs = L2ARC_FEED_SECS;	/* interval seconds */
 uint64_t l2arc_feed_min_ms = L2ARC_FEED_MIN_MS;	/* min interval milliseconds */
-boolean_t l2arc_noprefetch = B_TRUE;		/* don't cache prefetch bufs */
+boolean_t l2arc_noprefetch = B_FALSE;		/* cache prefetch bufs too */
 boolean_t l2arc_feed_again = B_TRUE;		/* turbo warmup */
 boolean_t l2arc_norw = B_TRUE;			/* no reads during writes */
 uint64_t max_arc_size = 0;
