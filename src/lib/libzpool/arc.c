@@ -561,7 +561,7 @@ uint64_t zfs_crc64_table[256];
 #define	L2ARC_WRITE_SIZE	(2 * 8 * 1024 * 1024)	/* initial write max doubled for improved performance on a workload 
                                                            where l2arc is much faster than regular pool devices */
 
-#define	L2ARC_HEADROOM		2		/* num of writes */
+#define	L2ARC_HEADROOM		8		/* num of writes */
 #define	L2ARC_FEED_SECS		1		/* caching interval secs */
 #define	L2ARC_FEED_MIN_MS	200		/* min caching interval ms */
 
